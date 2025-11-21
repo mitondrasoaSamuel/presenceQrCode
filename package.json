@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "create-admin": "node scripts/createAdmin.js",
     "import-csv": "node scripts/importCSV.js"
   },
   "keywords": [
