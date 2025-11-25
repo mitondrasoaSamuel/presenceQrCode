@@ -5,23 +5,23 @@ const { pool } = require('../config/database');
 
 const parseDate = (dateStr) => {
   if (!dateStr || dateStr === '') return null;
-  
+
   if (dateStr.includes('/')) {
     const [day, month, year] = dateStr.split('/');
     if (year && month && day) {
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
     }
   }
-  
+
   if (dateStr.includes('-')) {
     return dateStr.split(' ')[0];
   }
-  
+
   return null;
 };
 
 const importCSV = async () => {
-  const csvFilePath = '../tb_listepst.csv';
+  const csvFilePath = '../../tb_listepst.csv';
   const results = [];
 
   console.log('📖 Lecture du fichier CSV...');
@@ -70,7 +70,7 @@ const importCSV = async () => {
             lieu_affectation: row.fiaram || null,
             email: null,
             telephone: null,
-            photo_url: null
+            photo_url: null,
           };
 
           await pool.query(
@@ -86,7 +86,9 @@ const importCSV = async () => {
           );
 
           imported++;
-          console.log(`✅ Importé: ${pasteurData.nom} ${pasteurData.prenom} (${pasteurData.matricule})`);
+          console.log(
+            `✅ Importé: ${pasteurData.nom} ${pasteurData.prenom} (${pasteurData.matricule})`
+          );
         } catch (error) {
           errors++;
           console.error(`❌ Erreur pour ${row.matricule_pst}:`, error.message);
@@ -106,4 +108,3 @@ importCSV().catch((error) => {
   console.error('❌ Erreur fatale:', error);
   process.exit(1);
 });
-
