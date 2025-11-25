@@ -21,7 +21,7 @@ const parseDate = (dateStr) => {
 };
 
 const importCSV = async () => {
-  const csvFilePath = '../../tb_listepst.csv';
+  const csvFilePath = '../tb_listepst.csv';
   const results = [];
 
   console.log('📖 Lecture du fichier CSV...');
